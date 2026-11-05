@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مراجعة شاملة وبنك أسئلة: النقود والبنوك</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 9999px;
+        }
+        /* 3D Flip Card Styles */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        /* Blur effect for self-testing mode in tables */
+        .study-blur {
+            filter: blur(7px);
+            user-select: none;
+            cursor: pointer;
+            transition: filter 0.25s ease;
+        }
+        .study-blur:hover, .study-blur.revealed {
+            filter: blur(0);
+            user-select: auto;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .study-blur {
+                filter: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen transition-colors duration-300 selection:bg-indigo-500 selection:text-white">
+
+    <!-- Top Sticky Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-slate-900/90 border-b border-slate-800 shadow-lg no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                <!-- Title & Badge -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-slate-950 font-black text-xl">
+                            <i class="fa-solid fa-coins"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 class="text-lg sm:text-xl font-extrabold bg-gradient-to-l from-white via-indigo-200 to-amber-300 bg-clip-text text-transparent">
+                                    مراجعة النقود والبنوك
+                                </h1>
+                                <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">
+                                    بنك الأسئلة الكامل
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-400">الجداول النموذجية للامتحان • النقاط النظرية • معادلة التبادل • اختبارات تفاعلية</p>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Action Buttons -->
+                    <div class="flex md:hidden items-center gap-2">
+                        <button onclick="toggleStudyHideMode()" id="mobileBlurBtn" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 text-xs font-bold flex items-center gap-1" title="وضع التسميع (إخفاء الإجابات)">
+                            <i class="fa-solid fa-eye-slash"></i>
+                        </button>
+                        <button onclick="window.print()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs" title="طباعة">
+                            <i class="fa-solid fa-print"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search & Tools -->
+                <div class="flex items-center gap-2.5 flex-wrap">
+                    <div class="relative flex-1 sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input 
+                            type="text" 
+                            id="globalSearch" 
+                            oninput="handleGlobalSearch(this.value)"
+                            placeholder="ابحث عن عالم، تعريف، أو سؤال..." 
+                            class="w-full pr-10 pl-8 py-2 rounded-xl bg-slate-800/90 border border-slate-700 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition"
+                        >
+                        <button id="clearSearchBtn" onclick="clearGlobalSearch()" class="hidden absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </button>
+                    </div>
+
+                    <button onclick="toggleStudyHideMode()" id="desktopBlurBtn" class="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 text-xs font-bold transition">
+                        <i class="fa-solid fa-eye-slash" id="blurIcon"></i>
+                        <span id="blurBtnText">وضع التسميع: إيقاف</span>
+                    </button>
+
+                    <button onclick="window.print()" class="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition">
+                        <i class="fa-solid fa-print"></i>
+                        <span>طباعة</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex items-center gap-1.5 overflow-x-auto pt-3 pb-1 no-scrollbar" id="mainTabs">
+                <button onclick="switchTab('tables')" id="tab-btn-tables" class="tab-btn active-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
+                    <i class="fa-solid fa-table-list"></i>
+                    <span>١. الجداول النموذجية للامتحان</span>
+                </button>
+                <button onclick="switchTab('theory')" id="tab-btn-theory" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white">
+                    <i class="fa-solid fa-book-open-reader"></i>
+                    <span>٢. المقالي وملخص المحاضرات</span>
+                </button>
+                <button onclick="switchTab('tfquiz')" id="tab-btn-tfquiz" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white">
+                    <i class="fa-solid fa-check-double"></i>
+                    <span>٣. اختبار صح أم خطأ (١٦)</span>
+                </button>
+                <button onclick="switchTab('mcqquiz')" id="tab-btn-mcqquiz" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>٤. اختبار الاختياري (١٦)</span>
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>٥. بطاقات الحفظ السريع</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+
+        <!-- Quick Stats Banner -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 no-print">
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">أسئلة صح وخطأ بالتصحيح</div>
+                    <div class="text-base font-extrabold text-white">١٦ سؤالاً نموذجياً</div>
+                </div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">أسئلة الاختيار من متعدد</div>
+                    <div class="text-base font-extrabold text-white">١٦ سؤالاً (مجموعتان)</div>
+                </div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-coins"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">مقارنات ونقاط مقالية</div>
+                    <div class="text-base font-extrabold text-white">٥ مقالي + جدول مقارنة</div>
+                </div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-3.5 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-calculator"></i>
+                </div>
+                <div>
+                    <div class="text-xs text-slate-400">معادلة التبادل النقدية</div>
+                    <div class="text-base font-extrabold text-emerald-300">ق × س = ك × ع</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 1: الجداول النموذجية للامتحان
+             ========================================== -->
+        <section id="tab-tables" class="tab-content space-y-8">
+            
+            <!-- Instruction Alert Banner -->
+            <div class="bg-gradient-to-l from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2 text-indigo-300 font-bold text-sm sm:text-base">
+                        <i class="fa-solid fa-lightbulb text-amber-400"></i>
+                        <span>تنبيه هام لورقة الإجابة في الامتحان:</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        اشترط الدكتور في صيغة الأسئلة تنظيم الإجابة داخل <strong>جداول محددة الخانات</strong> (٣ خانات للصح والخطأ والمقارنة، وخانتين للاختيار من متعدد). يمكنك تفعيل <strong>"وضع التسميع"</strong> من الأعلى لإخفاء الإجابات واختبار حفظك بالضغط على أي خانة!
+                    </p>
+                </div>
+                <button onclick="toggleStudyHideMode()" class="shrink-0 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm transition shadow-lg shadow-amber-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>تفعيل / إيقاف إخفاء الإجابات</span>
+                </button>
+            </div>
+
+            <!-- 1. Table 1: Question 1 True/False (10 items) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl searchable-block">
+                <div class="p-4 sm:p-5 bg-slate-800/60 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-lg">السؤال الأول</span>
+                        <h2 class="text-base sm:text-lg font-extrabold text-white mt-1.5">
+                            ١. جدول صح أم خطأ مع التصحيح (جدول من ٣ خانات كما يُكتب في الامتحان)
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">ملاحظة: جميع العبارات العشر في هذا السؤال خاطئة (×) وتحتاج تصحيح الكلمة الأخيرة أو المميزة باللون الأحمر.</p>
+                    </div>
+                    <span class="text-xs bg-slate-950 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 font-semibold self-start sm:self-center">
+                        ٣ خانات: رقم العبارة | العلامة | التصحيح
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950/80 text-slate-300 text-xs sm:text-sm border-b border-slate-800">
+                                <th class="py-3.5 px-4 font-bold w-24 text-center border-l border-slate-800">رقم العبارة</th>
+                                <th class="py-3.5 px-4 font-bold border-l border-slate-800">نص العبارة في ورقة الأسئلة (مع تحديد موضع الخطأ)</th>
+                                <th class="py-3.5 px-4 font-bold w-24 text-center border-l border-slate-800">العلامة</th>
+                                <th class="py-3.5 px-4 font-bold w-56 text-emerald-400">تصحيح العبارة الخاطئة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-q1-tf" class="divide-y divide-slate-800/80 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 2. Table 2: Whiteboard & General Review True/False (6 items) -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl searchable-block">
+                <div class="p-4 sm:p-5 bg-slate-800/60 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">أسئلة السبورة والمراجعة العامة</span>
+                        <h2 class="text-base sm:text-lg font-extrabold text-white mt-1.5">
+                            ٢. جدول صح أم خطأ الإضافي (٦ عبارات هامة جداً من السبورة)
+                        </h2>
+                    </div>
+                    <span class="text-xs bg-slate-950 text-slate-300 px-3 py-1.5 rounded-xl border border-slate-700 font-semibold self-start sm:self-center">
+                        ٤ عبارات خطأ (×) + عبارتان صح (✓)
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950/80 text-slate-300 text-xs sm:text-sm border-b border-slate-800">
+                                <th class="py-3.5 px-4 font-bold w-24 text-center border-l border-slate-800">رقم العبارة</th>
+                                <th class="py-3.5 px-4 font-bold border-l border-slate-800">نص العبارة</th>
+                                <th class="py-3.5 px-4 font-bold w-24 text-center border-l border-slate-800">العلامة</th>
+                                <th class="py-3.5 px-4 font-bold w-64 text-emerald-400">التصحيح / التوضيح</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-q2-tf" class="divide-y divide-slate-800/80 text-sm">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 3. Table 5: Comparison Table (Gold Standard vs Fiat Paper Money) -->
+            <div class="bg-slate-900 border border-amber-500/30 rounded-2xl overflow-hidden shadow-xl searchable-block">
+                <div class="p-4 sm:p-5 bg-gradient-to-l from-amber-500/10 via-slate-800/60 to-slate-800/60 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2.5 py-1 rounded-lg">سؤال السبورة المقالي الهام</span>
+                        <h2 class="text-base sm:text-lg font-extrabold text-white mt-1.5">
+                            ٣. جدول المقارنة بين قاعدة الذهب وقاعدة النقود الورقية الإلزامية
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">مكون من ٣ خانات و٤ عناصر أساسية مطابقة لجدول المحاضرة على السبورة.</p>
+                    </div>
+                    <span class="text-xs bg-slate-950 text-amber-300 px-3 py-1.5 rounded-xl border border-amber-500/30 font-semibold self-start sm:self-center">
+                        ٣ خانات: العنصر | قاعدة الذهب | النقود الورقية الإلزامية
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right border-collapse">
+                        <thead>
+                            <tr class="bg-slate-950/90 text-xs sm:text-sm border-b border-slate-800">
+                                <th class="py-3.5 px-4 font-extrabold text-slate-200 w-40 border-l border-slate-800">العنصر</th>
+                                <th class="py-3.5 px-5 font-extrabold text-amber-400 border-l border-slate-800">
+                                    <i class="fa-solid fa-coins ml-1.5"></i>قاعدة الذهب
+                                </th>
+                                <th class="py-3.5 px-5 font-extrabold text-indigo-400">
+                                    <i class="fa-solid fa-money-bill-wave ml-1.5"></i>قاعدة النقود الورقية الإلزامية
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800 text-sm">
+                            <tr class="hover:bg-slate-800/40 transition searchable-row">
+                                <td class="py-4 px-4 font-extrabold text-slate-200 bg-slate-950/40 border-l border-slate-800">١) التعريف</td>
+                                <td class="py-4 px-5 text-slate-200 border-l border-slate-800 study-cell">
+                                    نظام نقدي يرتبط فيه إصدار النقود بالذهب <span class="text-amber-300 font-bold">(غطاء ذهبي جزئي أو كامل)</span>.
+                                </td>
+                                <td class="py-4 px-5 text-slate-200 study-cell">
+                                    نظام تصدر فيه النقود <span class="text-indigo-300 font-bold">بقوة القانون دون غطاء ذهبي</span>.
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition searchable-row">
+                                <td class="py-4 px-4 font-extrabold text-slate-200 bg-slate-950/40 border-l border-slate-800">٢) المزايا</td>
+                                <td class="py-4 px-5 text-slate-200 border-l border-slate-800 study-cell">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>استقرار الأسعار.</li>
+                                        <li>ثقة دولية بالنقود.</li>
+                                        <li>انضباط في الإصدار النقدي.</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-5 text-slate-200 study-cell">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>مرونة في السياسة النقدية.</li>
+                                        <li>انخفاض تكلفة الإصدار.</li>
+                                        <li>تلبية احتياجات النمو الاقتصادي.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition searchable-row">
+                                <td class="py-4 px-4 font-extrabold text-slate-200 bg-slate-950/40 border-l border-slate-800">٣) العيوب</td>
+                                <td class="py-4 px-5 text-slate-200 border-l border-slate-800 study-cell">
+                                    <ul class="list-disc list-inside space-y-1 text-rose-200">
+                                        <li>قيد على السياسة النقدية.</li>
+                                        <li>عرضة للأزمات بسبب ندرة الذهب.</li>
+                                    </ul>
+                                </td>
+                                <td class="py-4 px-5 text-slate-200 study-cell">
+                                    <ul class="list-disc list-inside space-y-1 text-rose-200">
+                                        <li>احتمال التضخم وفقدان الثقة إذا أسيء استخدامها.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-800/40 transition searchable-row">
+                                <td class="py-4 px-4 font-extrabold text-slate-200 bg-slate-950/40 border-l border-slate-800">٤) أمثلة تاريخية</td>
+                                <td class="py-4 px-5 text-amber-300 font-bold border-l border-slate-800 study-cell">
+                                    معظم الدول حتى الحرب العالمية الأولى.
+                                </td>
+                                <td class="py-4 px-5 text-indigo-300 font-bold study-cell">
+                                    جميع الدول الحديثة حالياً.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. Tables 3 & 4: MCQ Tables (Two Columns Exam Format) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- MCQ Group 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl searchable-block">
+                    <div class="p-4 sm:p-5 bg-slate-800/60 border-b border-slate-800">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-lg">السؤال الثاني (أ)</span>
+                            <span class="text-xs bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-lg font-bold">جميع إجاباته رقم (أ)</span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-white mt-2">
+                            ٤. جدول الاختيار من متعدد - المجموعة الأولى (٧ عبارات)
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">يُكتب في الامتحان من خانتين: (رقم العبارة | الاختيار الصحيح).</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right border-collapse">
+                            <thead>
+                                <tr class="bg-slate-950/80 text-slate-300 text-xs border-b border-slate-800">
+                                    <th class="py-3 px-3 font-bold w-16 text-center border-l border-slate-800">الرقم</th>
+                                    <th class="py-3 px-3 font-bold border-l border-slate-800">العبارة (للمراجعة)</th>
+                                    <th class="py-3 px-3 font-bold w-44 text-emerald-400">الاختيار الصحيح</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-mcq-1" class="divide-y divide-slate-800/80 text-xs sm:text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- MCQ Group 2 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-xl searchable-block">
+                    <div class="p-4 sm:p-5 bg-slate-800/60 border-b border-slate-800">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-xs font-bold text-purple-400 bg-purple-500/10 border border-purple-500/20 px-2.5 py-1 rounded-lg">السؤال الثالث + المراجعة العامة</span>
+                            <span class="text-xs bg-slate-950 text-slate-300 border border-slate-700 px-2.5 py-0.5 rounded-lg font-bold">٩ عبارات متكررة</span>
+                        </div>
+                        <h3 class="text-base font-extrabold text-white mt-2">
+                            ٥. جدول الاختيار من متعدد - المجموعة الثانية (٩ عبارات)
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">يُكتب في الامتحان من خانتين: (رقم العبارة | الاختيار الصحيح).</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-right border-collapse">
+                            <thead>
+                                <tr class="bg-slate-950/80 text-slate-300 text-xs border-b border-slate-800">
+                                    <th class="py-3 px-3 font-bold w-16 text-center border-l border-slate-800">الرقم</th>
+                                    <th class="py-3 px-3 font-bold border-l border-slate-800">العبارة (للمراجعة)</th>
+                                    <th class="py-3 px-3 font-bold w-52 text-emerald-400">الاختيار الصحيح</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-mcq-2" class="divide-y divide-slate-800/80 text-xs sm:text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 2: الأسئلة المقالية والملخص النظري
+             ========================================== -->
+        <section id="tab-theory" class="tab-content hidden space-y-8">
+            
+            <!-- Part 1: The 5 Bullet-Point Essay Questions -->
+            <div class="space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 uppercase">سؤال مضمون في الامتحان</span>
+                        <h2 class="text-xl font-extrabold text-white flex items-center gap-2 mt-0.5">
+                            <i class="fa-solid fa-pen-nib text-indigo-400"></i>
+                            <span>أولاً: أسئلة «اذكر في نقاط محددة فقط وبدون شرح» (٥ أسئلة)</span>
+                        </h2>
+                    </div>
+                    <p class="text-xs text-slate-400">اضغط على أي بطاقة لإخفاء أو إظهار النقاط للتسميع الذاتي</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Essay Card 1: وظائف النقود -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 text-xs font-bold">السؤال النظري ١</span>
+                                <span class="text-xs text-slate-400 font-semibold">٤ نقاط (٢ أساسية + ٢ مشتقة)</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">١- اذكر في نقاط محددة: وظائف النقود؟</h3>
+                            
+                            <div class="space-y-3 study-cell">
+                                <div class="bg-slate-950/70 border border-slate-800/90 rounded-xl p-3">
+                                    <div class="text-xs font-extrabold text-indigo-400 mb-2">أولاً: الوظائف الأساسية وتشمل كلاً من:</div>
+                                    <ol class="list-decimal list-inside space-y-1.5 text-sm text-slate-200 font-medium">
+                                        <li>وحدة حساب ومقياس للقيمة.</li>
+                                        <li>وسيلة للتبادل.</li>
+                                    </ol>
+                                </div>
+                                <div class="bg-slate-950/70 border border-slate-800/90 rounded-xl p-3">
+                                    <div class="text-xs font-extrabold text-amber-400 mb-2">ثانياً: الوظائف المشتقة (الثانوية):</div>
+                                    <ol class="list-decimal list-inside space-y-1.5 text-sm text-slate-200 font-medium">
+                                        <li>مخزن للقيمة.</li>
+                                        <li>وسيلة للمدفوعات الآجلة.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Essay Card 2: الشروط التي يجب توافرها في النقود -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold">السؤال النظري ٢</span>
+                                <span class="text-xs text-slate-400 font-semibold">٦ شروط أساسية</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">٢- الشروط التي يجب توافرها في النقود؟</h3>
+                            <ol class="space-y-2 text-sm text-slate-200 study-cell">
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">١</span>
+                                    <span>أن تتمتع <strong>بالقبول العام</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٢</span>
+                                    <span>أن تكون وحداتها <strong>متجانسة ومتماثلة</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٣</span>
+                                    <span>أن تتوفر منها <strong>كميات كافية لا تزيد أو تنقص</strong> مما يعمل على الحفاظ على القيمة التبادلية لها.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٤</span>
+                                    <span>أن تكون <strong>قابلة للتقسيم</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٥</span>
+                                    <span>تتميز النقود <strong>بخفة وزنها وسهولة الحمل</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٦</span>
+                                    <span>تكون النقود <strong>غير قابلة للتلف أو الهلاك السريع</strong>.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Essay Card 3: أهمية النقود في الاقتصاد -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-500/30 text-xs font-bold">السؤال النظري ٣</span>
+                                <span class="text-xs text-slate-400 font-semibold">٧ نقاط</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">٣- أهمية النقود في الاقتصاد؟</h3>
+                            <ol class="space-y-1.5 text-sm text-slate-200 study-cell">
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">١</span>
+                                    <span>تسهيل عمليات التبادل.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٢</span>
+                                    <span>تحقيق الكفاءة الاقتصادية.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٣</span>
+                                    <span>مخزن للقيمة.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٤</span>
+                                    <span>أداة للسياسات الاقتصادية.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٥</span>
+                                    <span>مقياس للقيمة.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٦</span>
+                                    <span>تعزيز التجارة الداخلية والدولية.</span>
+                                </li>
+                                <li class="flex items-center gap-2 bg-slate-950/60 p-2 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-purple-500/20 text-purple-300 text-xs font-bold flex items-center justify-center shrink-0">٧</span>
+                                    <span>خلق الثقة في النظام الاقتصادي.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Essay Card 4: شروط قاعدة الذهب -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">السؤال النظري ٤</span>
+                                <span class="text-xs text-slate-400 font-semibold">٤ شروط</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">٤- شروط قاعدة الذهب؟</h3>
+                            <ol class="space-y-2 text-sm text-slate-200 study-cell">
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">١</span>
+                                    <span>أن تحدد كل دولة قيمة عملتها <strong>بوزن معين من الذهب</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٢</span>
+                                    <span>أن تحدد كل أنواع النقود الأخرى <strong>بالنقود الأساسية في الدولة</strong>.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٣</span>
+                                    <span>حرية الأفراد في <strong>تحويل النقود إلى ذهب والذهب إلى نقود</strong> عن طريق السلطات النقدية.</span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/70">
+                                    <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">٤</span>
+                                    <span><strong>حرية تصدير واستيراد الذهب</strong>.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Essay Card 5: مزايا قاعدة الذهب -->
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">السؤال النظري ٥</span>
+                                <span class="text-xs text-slate-400 font-semibold">٣ مزايا</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">٥- مزايا قاعدة الذهب؟</h3>
+                            <ol class="space-y-2.5 text-sm text-slate-200 study-cell">
+                                <li class="flex items-center gap-2.5 bg-slate-950/60 p-3 rounded-lg border border-slate-800/70">
+                                    <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0">١</span>
+                                    <span><strong>استقرار قيمة النقود</strong>.</span>
+                                </li>
+                                <li class="flex items-center gap-2.5 bg-slate-950/60 p-3 rounded-lg border border-slate-800/70">
+                                    <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0">٢</span>
+                                    <span><strong>توفير وسيلة للمدفوعات الدولية</strong>.</span>
+                                </li>
+                                <li class="flex items-center gap-2.5 bg-slate-950/60 p-3 rounded-lg border border-slate-800/70">
+                                    <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 text-xs font-bold flex items-center justify-center shrink-0">٣</span>
+                                    <span><strong>استقرار معدل التبادل الدولي أو سعر الصرف</strong>.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Scientists Definitions Summary Card -->
+                    <div class="bg-slate-900 border border-rose-500/30 rounded-2xl p-5 flex flex-col justify-between shadow-lg searchable-block">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-rose-500/15 text-rose-300 border border-rose-500/30 text-xs font-bold">مفتاح حل السؤال الأول</span>
+                                <span class="text-xs text-slate-400 font-semibold">٣ علماء</span>
+                            </div>
+                            <h3 class="text-base font-extrabold text-white mb-3">تعريفات العلماء للنقود (احذر الخدع!)</h3>
+                            <div class="space-y-2.5 text-xs sm:text-sm text-slate-200 study-cell">
+                                <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+                                    <div class="font-extrabold text-amber-300">١. العالم John Klein (جون كلاين):</div>
+                                    <p class="mt-1">أي شيء يلقى قبولاً عاماً كوسيلة لتسديد <span class="text-emerald-400 font-bold underline">الديون</span> (وليس النقود).</p>
+                                </div>
+                                <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+                                    <div class="font-extrabold text-amber-300">٢. العالم Edward Shapiro (إدوارد شابيرو):</div>
+                                    <p class="mt-1">أي شيء مقبول كوسيلة دفع للحصول على السلع والخدمات وتسديد <span class="text-emerald-400 font-bold underline">الديون</span> (وليس المبالغ).</p>
+                                </div>
+                                <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+                                    <div class="font-extrabold text-amber-300">٣. الفرنسي Emile James (إميل جيمس):</div>
+                                    <p class="mt-1">كل سلعة تسمح بحكم القانون أو العرف لكل مشتري أو مدين مقابل سلعة أو تسديد دين دون رفض أو مناقشة قيمتها من قبل البائع أو <span class="text-emerald-400 font-bold underline">الدائن</span> (وليس المشتري).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Part 2: Lecture Notes, Equation of Exchange & Banking Assets -->
+            <div class="space-y-5 pt-4">
+                <div class="border-b border-slate-800 pb-3">
+                    <span class="text-xs font-bold text-emerald-400 uppercase">ملاحظات المحاضرات الهامة جداً</span>
+                    <h2 class="text-xl font-extrabold text-white flex items-center gap-2 mt-0.5">
+                        <i class="fa-solid fa-chalkboard-user text-emerald-400"></i>
+                        <span>ثانياً: نظرية كمية النقود (معادلة المبادلات) والائتمان والضمانات البنكية</span>
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Equation of Exchange & Interactive Calculator -->
+                    <div class="lg:col-span-7 bg-slate-900 border border-emerald-500/30 rounded-2xl p-5 sm:p-6 space-y-5 shadow-xl searchable-block">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                                <i class="fa-solid fa-square-root-variable text-emerald-400"></i>
+                                <span>نظرية كمية النقود (معادلة المبادلات)</span>
+                            </h3>
+                            <span class="text-sm font-black bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3.5 py-1 rounded-xl">
+                                الطلب = العرض ⟵ ق × س = ك × ع
+                            </span>
+                        </div>
+
+                        <!-- Symbols Breakdown -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="text-xl font-black text-emerald-400">ق</div>
+                                <div class="text-xs text-slate-300 font-bold mt-1">كمية النقود</div>
+                                <div class="text-[11px] text-slate-400">(متغير مستقل)</div>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="text-xl font-black text-amber-400">س</div>
+                                <div class="text-xs text-slate-300 font-bold mt-1">سرعة دوران النقود</div>
+                                <div class="text-[11px] text-amber-300/80">(عامل ثابت بالافتراض)</div>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="text-xl font-black text-indigo-400">ك</div>
+                                <div class="text-xs text-slate-300 font-bold mt-1">كمية (حجم) الإنتاج</div>
+                                <div class="text-[11px] text-indigo-300/80">(عامل ثابت بالافتراض)</div>
+                            </div>
+                            <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <div class="text-xl font-black text-rose-400">ع</div>
+                                <div class="text-xs text-slate-300 font-bold mt-1">المستوى العام للأسعار</div>
+                                <div class="text-[11px] text-rose-300/80">(يتناسب طردياً مع ق)</div>
+                            </div>
+                        </div>
+
+                        <!-- Important Definitions & Assumptions -->
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-slate-950/80 border-r-4 border-emerald-500 p-3.5 rounded-xl">
+                                <div class="font-extrabold text-emerald-300">مهم جداً — تعريف سرعة دوران النقود (س):</div>
+                                <p class="text-slate-200 mt-1">هي <strong>متوسط عدد مرات انتقال وحدة النقود من يد إلى يد</strong> خلال فترة زمنية معينة عادة تكون <strong>سنة</strong>.</p>
+                            </div>
+
+                            <div class="bg-slate-950/80 border-r-4 border-indigo-500 p-3.5 rounded-xl">
+                                <div class="font-extrabold text-indigo-300">مهم جداً — افتراضات نظرية كمية النقود:</div>
+                                <p class="text-slate-200 mt-1">تفترض النظرية: <strong>(١) ثبات حجم الإنتاج (ك)</strong>، و<strong>(٢) ثبات سرعة دوران النقود (س)</strong>. ولذلك فإن أي زيادة في كمية النقود (ق) تؤدي مباشرة إلى ارتفاع المستوى العام للأسعار (ع) <span class="text-amber-300 font-bold">(علاقة طردية)</span>، وانخفاض قيمة النقود الحقيقية بنفس النسبة.</p>
+                            </div>
+
+                            <div class="bg-slate-950/80 border-r-4 border-amber-500 p-3.5 rounded-xl">
+                                <div class="font-extrabold text-amber-300">تعريف النظام النقدي:</div>
+                                <p class="text-slate-200 mt-1">هو <strong>مجموعة من القواعد والإجراءات التي تنظم إصدار النقود وزيادتها أو سحبها من التداول</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Mini Calculator for Lecture Example -->
+                        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 space-y-3 no-print">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-extrabold text-emerald-400 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-calculator"></i>
+                                    <span>محاكي مثال المحاضرة (ق × س = قيمة المعاملات ك × ع)</span>
+                                </span>
+                                <button onclick="resetEqCalc()" class="text-xs text-slate-400 hover:text-white underline">إعادة لمثال المليار جنيه</button>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                                <div>
+                                    <label class="block text-slate-400 mb-1">إجمالي العرض/المعاملات المطلوبة (ك × ع) بالمليون:</label>
+                                    <input type="number" id="calcTotal" value="1000" oninput="updateEqCalc()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-400 mb-1">سرعة دوران النقود (س) في السنة:</label>
+                                    <input type="number" id="calcVelocity" value="100" oninput="updateEqCalc()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-white font-bold">
+                                </div>
+                            </div>
+                            <div class="bg-emerald-950/40 border border-emerald-500/30 rounded-xl p-3 flex items-center justify-between">
+                                <span class="text-xs text-slate-300">كمية النقود المطلوب من الدولة طباعتها (ق):</span>
+                                <span id="calcResult" class="text-base font-black text-emerald-300">١٠ مليون جنيه</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wealth, Loans, Guarantees & Fixed Assets -->
+                    <div class="lg:col-span-5 bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 space-y-4 shadow-xl searchable-block">
+                        <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-building-columns text-amber-400"></i>
+                            <span>أثر الأسعار على الثروة + القروض والضمانات</span>
+                        </h3>
+
+                        <!-- Wealth Types -->
+                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-2">
+                            <div class="text-xs font-extrabold text-amber-400">١. أثر تقلبات الأسعار على أشكال الثروة:</div>
+                            <ul class="text-xs sm:text-sm text-slate-200 space-y-1.5">
+                                <li>• <strong>ثروة نقدية:</strong> التي توجد في البنك أو النقود السائلة (تتآكل قوتها الشرائية بارتفاع الأسعار وتضر أصحاب الدخول الثابتة والدائنين).</li>
+                                <li>• <strong>ثروة عينية:</strong> مثل العقارات، الأراضي، السيارات (الأصول الثابتة) تحافظ على قيمتها أو ترتفع مع التضخم.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Loans & Liquidity -->
+                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-2">
+                            <div class="text-xs font-extrabold text-rose-400">٢. السلف والقروض (الربحية مقابل السيولة):</div>
+                            <ul class="text-xs sm:text-sm text-slate-200 space-y-1.5">
+                                <li>• عندما يمنح البنك قرضاً يأخذ أكبر عائد ممكن بنسبة فائدة عالية، فهو <strong>أعلى أنواع الأصول من حيث الربحية</strong>.</li>
+                                <li>• لكن <strong>السيولة في مدة القرض تساوي صفر</strong>.</li>
+                                <li>• تقلبات الأسعار (التضخم) تكون <strong>في صالح المدين وليس الدائن</strong>.</li>
+                            </ul>
+                        </div>
+
+                        <!-- Types of Loan Guarantees -->
+                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-2">
+                            <div class="text-xs font-extrabold text-indigo-400">٣. أنواع ضمانات القروض في البنوك:</div>
+                            <div class="space-y-2 text-xs sm:text-sm">
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <span class="font-bold text-slate-400">أ) ضمان شخصي:</span>
+                                    <span class="text-rose-400 font-semibold"> انتهى العمل به في هذه المرحلة.</span>
+                                </div>
+                                <div class="p-2 rounded-lg bg-slate-900 border border-slate-800">
+                                    <span class="font-bold text-amber-300">ب) ضمان عيني:</span>
+                                    <span class="text-slate-300"> مثل رهن الشقة أو أراضي أو مجوهرات في البنك أو محصول.</span>
+                                </div>
+                                <div class="p-2 rounded-lg bg-emerald-950/30 border border-emerald-500/40">
+                                    <span class="font-bold text-emerald-300">ج) ضمان مالي (أفضل ضمان):</span>
+                                    <span class="text-slate-200"> وجود ودائع في البنك بضمان هذه الودائع، أو <strong>تحويل مرتب الموظف</strong>.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fixed Assets in Bank -->
+                        <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5">
+                            <div class="text-xs font-extrabold text-purple-400">٤. الأصول الثابتة في البنك:</div>
+                            <p class="text-xs sm:text-sm text-slate-200 mt-1">
+                                عبارة عن الأراضي والمباني والمعدات والآلات الموجودة في البنك، والبنك لا يستطيع التصرف فيها بسهولة لسداد التزاماته.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 3: اختبار تفاعلي: صح أم خطأ مع التصحيح
+             ========================================== -->
+        <section id="tab-tfquiz" class="tab-content hidden space-y-6">
+            <!-- Quiz Header & Controls -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold text-rose-400 bg-rose-500/10 border border-rose-500/20 px-2.5 py-1 rounded-lg">محاكي السؤال الأول وسؤال السبورة</span>
+                        <h2 class="text-xl font-extrabold text-white mt-1.5">اختبار صح أم خطأ مع تصحيح الخطأ (١٦ سؤالاً)</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">اختر (صح) أو (خطأ)، وعند اختيار (خطأ) اختبر نفسك في تحديد الكلمة الصحيحة البديلة كما في جدول الامتحان!</p>
+                    </div>
+
+                    <!-- Score & Reset -->
+                    <div class="flex items-center gap-3 flex-wrap">
+                        <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-center">
+                            <div class="text-[11px] text-slate-400">النتيجة الحالية</div>
+                            <div class="text-lg font-black text-emerald-400" id="tf-score-display">0 / 16</div>
+                        </div>
+                        <button onclick="resetTFQuiz()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>إعادة الاختبار</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter Pills -->
+                <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-800 overflow-x-auto">
+                    <button onclick="filterTFQuiz('all')" id="tf-filter-all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white">الكل (١٦)</button>
+                    <button onclick="filterTFQuiz('q1')" id="tf-filter-q1" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white">السؤال الأول (١٠ عبارات)</button>
+                    <button onclick="filterTFQuiz('board')" id="tf-filter-board" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white">أسئلة السبورة والمراجعة (٦ عبارات)</button>
+                </div>
+            </div>
+
+            <!-- TF Questions Container -->
+            <div id="tf-quiz-container" class="space-y-4">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 4: اختبار تفاعلي: اختيار من متعدد
+             ========================================== -->
+        <section id="tab-mcqquiz" class="tab-content hidden space-y-6">
+            <!-- MCQ Header & Controls -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-xl">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-lg">محاكي السؤال الثاني (أ) والسؤال الثالث</span>
+                        <h2 class="text-xl font-extrabold text-white mt-1.5">اختبار الاختيار من متعدد (١٦ سؤالاً)</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">يمكنك التدرب بترتيب الملزمة الأصلي (حيث المجموعة الأولى كلها أ) أو خلط الاختيارات للتأكد من فهمك العميق!</p>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 flex-wrap">
+                        <div class="bg-slate-950 border border-slate-800 px-4 py-2 rounded-xl text-center">
+                            <div class="text-[11px] text-slate-400">النتيجة الحالية</div>
+                            <div class="text-lg font-black text-indigo-400" id="mcq-score-display">0 / 16</div>
+                        </div>
+                        <button onclick="toggleMCQShuffle()" id="mcq-shuffle-btn" class="px-3.5 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 text-xs font-bold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-shuffle"></i>
+                            <span id="mcq-shuffle-text">ترتيب الخيارات: الملزمة الأصلي</span>
+                        </button>
+                        <button onclick="resetMCQQuiz()" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold flex items-center gap-2 transition">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>إعادة</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Group Filter Pills -->
+                <div class="flex items-center gap-2 mt-4 pt-4 border-t border-slate-800 overflow-x-auto">
+                    <button onclick="filterMCQQuiz('all')" id="mcq-filter-all" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white">الكل (١٦)</button>
+                    <button onclick="filterMCQQuiz('set1')" id="mcq-filter-set1" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white">المجموعة الأولى - السؤال الثاني أ (٧)</button>
+                    <button onclick="filterMCQQuiz('set2')" id="mcq-filter-set2" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white">المجموعة الثانية - السؤال الثالث والمراجعة (٩)</button>
+                </div>
+            </div>
+
+            <!-- MCQ Questions Container -->
+            <div id="mcq-quiz-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 5: بطاقات الحفظ السريع (Flashcards)
+             ========================================== -->
+        <section id="tab-flashcards" class="tab-content hidden space-y-6">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">مراجعة ليلة الامتحان</span>
+                        <h2 class="text-xl font-extrabold text-white mt-1.5">بطاقات الذاكرة السريعة (اضغط على البطاقة لقلبها)</h2>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-0.5">تغطي جميع المصطلحات، العلماء، الأسئلة المقالية، والمقارنات في بطاقات تفاعلية.</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span id="flashcard-counter" class="text-sm font-extrabold text-amber-300 bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800">
+                            ١ / ١٨
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Interactive Single Large Flashcard Viewer -->
+                <div class="max-w-2xl mx-auto my-8">
+                    <div onclick="flipCurrentCard()" class="perspective-1000 cursor-pointer h-72 sm:h-80 w-full">
+                        <div id="flashcard-inner" class="transform-style-3d relative w-full h-full rounded-3xl shadow-2xl">
+                            <!-- Front -->
+                            <div class="backface-hidden absolute inset-0 bg-gradient-to-br from-slate-800 via-slate-900 to-indigo-950 border-2 border-indigo-500/40 rounded-3xl p-6 sm:p-8 flex flex-col justify-between items-center text-center">
+                                <div class="w-full flex items-center justify-between text-xs text-indigo-300 font-bold">
+                                    <span id="fc-category" class="bg-indigo-500/20 px-3 py-1 rounded-full border border-indigo-500/30">تعريفات ومفاهيم</span>
+                                    <span><i class="fa-solid fa-hand-pointer ml-1"></i>اضغط لقلب البطاقة</span>
+                                </div>
+                                <div class="my-auto space-y-3">
+                                    <h3 id="fc-question" class="text-lg sm:text-2xl font-extrabold text-white leading-relaxed"></h3>
+                                </div>
+                                <div class="text-xs text-slate-400">حاول التسميع لنفسك قبل قلب البطاقة</div>
+                            </div>
+
+                            <!-- Back -->
+                            <div class="backface-hidden rotate-y-180 absolute inset-0 bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-900 border-2 border-emerald-500/50 rounded-3xl p-6 sm:p-8 flex flex-col justify-between items-center text-center overflow-y-auto">
+                                <div class="w-full flex items-center justify-between text-xs text-emerald-300 font-bold">
+                                    <span class="bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/30">الإجابة النموذجية</span>
+                                    <span><i class="fa-solid fa-rotate ml-1"></i>اضغط للعودة للسؤال</span>
+                                </div>
+                                <div id="fc-answer" class="my-auto text-sm sm:text-base font-bold text-slate-100 leading-relaxed space-y-2 text-right w-full"></div>
+                                <div class="text-xs text-emerald-400 font-semibold">إجابة معتمدة من الملزمة والمحاضرة</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="flex items-center justify-between gap-4 mt-6">
+                        <button onclick="prevFlashcard()" class="flex-1 py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 transition">
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span>السابق</span>
+                        </button>
+                        <button onclick="flipCurrentCard()" class="py-3 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition">
+                            <i class="fa-solid fa-retweet"></i>
+                            <span>اقلب البطاقة</span>
+                        </button>
+                        <button onclick="nextFlashcard()" class="flex-1 py-3 px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 transition">
+                            <span>التالي</span>
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-6 mt-12 text-center text-xs text-slate-500 no-print">
+        <p>منصة المراجعة التفاعلية لمادة النقود والبنوك • مصممة خصيصاً للتدريب على الجداول النموذجية والأسئلة المقالية والاختيارية</p>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT DATA & APPLICATION LOGIC
+         ========================================== -->
+    <script>
+        // 1. DATA: Question 1 True/False (10 items)
+        const tfSet1Data = [
+            {
+                id: 1,
+                numAr: '١',
+                statement: 'عرف العالم John Klein النقود بأنها أي شيء يلقى قبولاً عاماً كوسيلة لتسديد <span class="text-rose-400 line-through font-bold">النقود</span>.',
+                rawStatement: 'عرف العالم John Klein النقود بأنها أي شيء يلقى قبولاً عاماً كوسيلة لتسديد النقود.',
+                isTrue: false,
+                wrongWord: 'النقود',
+                correction: 'الديون',
+                fullCorrection: 'لتسديد الديون (بدلاً من النقود)',
+                options: ['الديون', 'الضرائب العامة', 'المبالغ', 'الودائع']
+            },
+            {
+                id: 2,
+                numAr: '٢',
+                statement: 'عرف العالم Edward Shapiro النقود بأنها أي شيء مقبول كوسيلة دفع للحصول على السلع والخدمات وتسديد <span class="text-rose-400 line-through font-bold">المبالغ</span>.',
+                rawStatement: 'عرف العالم Edward Shapiro النقود بأنها أي شيء مقبول كوسيلة دفع للحصول على السلع والخدمات وتسديد المبالغ.',
+                isTrue: false,
+                wrongWord: 'المبالغ',
+                correction: 'الديون',
+                fullCorrection: 'وتسديد الديون (بدلاً من المبالغ)',
+                options: ['الديون', 'القروض', 'الفوائد', 'الأجور']
+            },
+            {
+                id: 3,
+                numAr: '٣',
+                statement: 'عرف الاقتصادي الفرنسي Emile James النقود بأنها كل سلعة تسمح بحكم القانون أو العرف لكل مشتري أو مدين مقابل سلعة أو تسديد دين دون رفض أو مناقشة قيمتها من قبل البائع أو <span class="text-rose-400 line-through font-bold">المشتري</span>.',
+                rawStatement: 'عرف الاقتصادي الفرنسي Emile James النقود بأنها كل سلعة تسمح بحكم القانون أو العرف لكل مشتري أو مدين مقابل سلعة أو تسديد دين دون رفض أو مناقشة قيمتها من قبل البائع أو المشتري.',
+                isTrue: false,
+                wrongWord: 'المشتري',
+                correction: 'الدائن',
+                fullCorrection: 'أو الدائن (بدلاً من المشتري)',
+                options: ['الدائن', 'المدين', 'المستهلك', 'البنك المركزي']
+            },
+            {
+                id: 4,
+                numAr: '٤',
+                statement: 'من الشروط التي يجب أن تتوفر في النقود هي أن تتمتع بالقبول العام أي يقبلها جميع الأفراد لتبادل السلع والخدمات ولتسديد <span class="text-rose-400 line-through font-bold">الضرائب العامة</span>.',
+                rawStatement: 'من الشروط التي يجب أن تتوفر في النقود هي أن تتمتع بالقبول العام أي يقبلها جميع الأفراد لتبادل السلع والخدمات ولتسديد الضرائب العامة.',
+                isTrue: false,
+                wrongWord: 'الضرائب العامة',
+                correction: 'الديون',
+                fullCorrection: 'ولتسديد الديون (بدلاً من الضرائب العامة)',
+                options: ['الديون', 'النفقات الحكومية', 'الفوائد البنكية', 'الأوراق المالية']
+            },
+            {
+                id: 5,
+                numAr: '٥',
+                statement: 'من الشروط التي يجب توافرها في النقود تميزها <span class="text-rose-400 line-through font-bold">بخفة حجمها</span> وسهولة الحمل.',
+                rawStatement: 'من الشروط التي يجب توافرها في النقود تميزها بخفة حجمها وسهولة الحمل.',
+                isTrue: false,
+                wrongWord: 'بخفة حجمها',
+                correction: 'خفة وزنها',
+                fullCorrection: 'خفة وزنها (بدلاً من خفة حجمها)',
+                options: ['خفة وزنها', 'كبر حجمها', 'ثقل وزنها', 'نعومة ملمسها']
+            },
+            {
+                id: 6,
+                numAr: '٦',
+                statement: 'وظائف النقود وظائف أساسية ووظائف <span class="text-rose-400 line-through font-bold">مشتركة</span>.',
+                rawStatement: 'وظائف النقود وظائف أساسية ووظائف مشتركة.',
+                isTrue: false,
+                wrongWord: 'مشتركة',
+                correction: 'مشتقة (ثانوية)',
+                fullCorrection: 'مشتقة / ثانوية (بدلاً من مشتركة)',
+                options: ['مشتقة (ثانوية)', 'تكميلية', 'قانونية', 'تجارية']
+            },
+            {
+                id: 7,
+                numAr: '٧',
+                statement: 'النقود الائتمانية أو المصرفية وتطلق على نقود الودائع أو النقود الكتابية وتمثل وسيلة مهمة للدفع وتستخدم في <span class="text-rose-400 line-through font-bold">الدول النامية</span> ذات الأنظمة المصرفية الحديثة.',
+                rawStatement: 'النقود الائتمانية أو المصرفية وتطلق على نقود الودائع أو النقود الكتابية وتمثل وسيلة مهمة للدفع وتستخدم في الدول النامية ذات الأنظمة المصرفية الحديثة.',
+                isTrue: false,
+                wrongWord: 'الدول النامية',
+                correction: 'الدول المتقدمة',
+                fullCorrection: 'الدول المتقدمة (بدلاً من الدول النامية)',
+                options: ['الدول المتقدمة', 'الدول الزراعية', 'الدول الناشئة', 'المجتمعات البدائية']
+            },
+            {
+                id: 8,
+                numAr: '٨',
+                statement: 'النقود الإلكترونية وهي قيمة نقدية تتخذ شكل وحدات ائتمانية مخزونة على شكل أداة إلكترونية يمتلكها <span class="text-rose-400 line-through font-bold">الفرد</span> وسميت بالبطاقة الإلكترونية.',
+                rawStatement: 'النقود الإلكترونية وهي قيمة نقدية تتخذ شكل وحدات ائتمانية مخزونة على شكل أداة إلكترونية يمتلكها الفرد وسميت بالبطاقة الإلكترونية.',
+                isTrue: false,
+                wrongWord: 'الفرد',
+                correction: 'المستخدم',
+                fullCorrection: 'يمتلكها المستخدم (بدلاً من الفرد)',
+                options: ['المستخدم', 'البنك التجاري', 'التاجر', 'الدائن']
+            },
+            {
+                id: 9,
+                numAr: '٩',
+                statement: 'من أنواع النقود الإلكترونية البطاقة الإلكترونية و<span class="text-rose-400 line-through font-bold">سعر الخصم</span> والشيكات الإلكترونية.',
+                rawStatement: 'من أنواع النقود الإلكترونية البطاقة الإلكترونية وسعر الخصم والشيكات الإلكترونية.',
+                isTrue: false,
+                wrongWord: 'سعر الخصم',
+                correction: 'بطاقات الخصم',
+                fullCorrection: 'بطاقات الخصم (بدلاً من سعر الخصم)',
+                options: ['بطاقات الخصم', 'معدل الفائدة', 'الاحتياطي القانوني', 'أذون الخزانة']
+            },
+            {
+                id: 10,
+                numAr: '١٠',
+                statement: 'النقود المساعدة وهي النقود التي تصدرها <span class="text-rose-400 line-through font-bold">السلطة القانونية</span> في شكل قطع نقدية من معادن مختلفة.',
+                rawStatement: 'النقود المساعدة وهي النقود التي تصدرها السلطة القانونية في شكل قطع نقدية من معادن مختلفة.',
+                isTrue: false,
+                wrongWord: 'السلطة القانونية',
+                correction: 'السلطة التنفيذية',
+                fullCorrection: 'السلطة التنفيذية (بدلاً من السلطة القانونية)',
+                options: ['السلطة التنفيذية', 'السلطة القضائية', 'البنوك التجارية', 'الشركات المساهمة']
+            }
+        ];
+
+        // 2. DATA: Whiteboard & General Review True/False (6 items)
+        const tfSet2Data = [
+            {
+                id: 11,
+                numAr: '١',
+                statement: 'تؤدي تقلبات الأسعار إلى <span class="text-rose-400 line-through font-bold">آثار متساوية</span> على الدائنين والمدينين.',
+                rawStatement: 'تؤدي تقلبات الأسعار إلى آثار متساوية على الدائنين والمدينين.',
+                isTrue: false,
+                correction: 'آثار غير متساوية (تكون في صالح المدين وتضر الدائن عند ارتفاع الأسعار)',
+                fullCorrection: 'آثار غير متساوية (في صالح المدين وليس الدائن)',
+                options: ['آثار غير متساوية (في صالح المدين)', 'آثار في صالح الدائن فقط', 'لا تؤثر نهائياً', 'تزيد القوة الشرائية للدائن']
+            },
+            {
+                id: 12,
+                numAr: '٢',
+                statement: 'قاعدة المعدنين تتميز <span class="text-rose-400 line-through font-bold">بسهولة المحافظة</span> على استقرار أسعار الصرف بين الدول.',
+                rawStatement: 'قاعدة المعدنين تتميز بسهولة المحافظة على استقرار أسعار الصرف بين الدول.',
+                isTrue: false,
+                correction: 'صعوبة المحافظة (أو قاعدة الذهب هي التي تتميز باستقرار أسعار الصرف)',
+                fullCorrection: 'صعوبة المحافظة / قاعدة الذهب هي المستقرة',
+                options: ['صعوبة المحافظة (وقاعدة الذهب هي التي تتميز باستقرار الصرف)', 'ثبات أبدي في الأسعار', 'إلغاء النقود المعدنية', 'زيادة الاحتياطي الورقي']
+            },
+            {
+                id: 13,
+                numAr: '٣',
+                statement: 'النقود الإلكترونية تعتبر مرحلة من مراحل تطور النقود في شكلها وليست في وظيفتها.',
+                rawStatement: 'النقود الإلكترونية تعتبر مرحلة من مراحل تطور النقود في شكلها وليست في وظيفتها.',
+                isTrue: true,
+                correction: 'العبارة صحيحة (تطور في الشكل وليس في الوظيفة)',
+                fullCorrection: 'العبارة صحيحة (✓)',
+                options: []
+            },
+            {
+                id: 14,
+                numAr: '٤',
+                statement: 'من <span class="text-rose-400 line-through font-bold">مزايا قاعدة الذهب</span> أن الدولة تستطيع بسهولة التحكم في عرض النقود لتحقيق الاستقرار الاقتصادي.',
+                rawStatement: 'من مزايا قاعدة الذهب أن الدولة تستطيع بسهولة التحكم في عرض النقود لتحقيق الاستقرار الاقتصادي.',
+                isTrue: false,
+                correction: 'من عيوب قاعدة الذهب أنها قيد على السياسة النقدية (وقاعدة النقود الورقية الإلزامية هي المرنة)',
+                fullCorrection: 'من عيوب قاعدة الذهب أنها قيد على السياسة النقدية',
+                options: ['قيد على السياسة النقدية (والمرونة من مزايا النقود الورقية الإلزامية)', 'تؤدي لوفرة مفرطة في الذهب', 'تمنع التجارة الدولية', 'تلغي دور البنوك']
+            },
+            {
+                id: 15,
+                numAr: '٥',
+                statement: 'وفقاً لنظرية كمية النقود العلاقة بين كمية النقود والأسعار علاقة <span class="text-rose-400 line-through font-bold">عكسية</span>.',
+                rawStatement: 'وفقاً لنظرية كمية النقود العلاقة بين كمية النقود والأسعار علاقة عكسية.',
+                isTrue: false,
+                correction: 'علاقة طردية',
+                fullCorrection: 'علاقة طردية (بدلاً من عكسية)',
+                options: ['علاقة طردية', 'علاقة ثبات', 'علاقة غير موجودة', 'علاقة تناقصية']
+            },
+            {
+                id: 16,
+                numAr: '٦',
+                statement: 'ارتفاع الأسعار يؤدي إلى تآكل القوة الشرائية للنقود ويؤثر سلباً على أصحاب الدخول الثابتة.',
+                rawStatement: 'ارتفاع الأسعار يؤدي إلى تآكل القوة الشرائية للنقود ويؤثر سلباً على أصحاب الدخول الثابتة.',
+                isTrue: true,
+                correction: 'العبارة صحيحة',
+                fullCorrection: 'العبارة صحيحة (✓)',
+                options: []
+            }
+        ];
+
+        // 3. DATA: MCQ Group 1 (Question 2A - 7 items, all Answer 'أ' in original sheet)
+        const mcqSet1Data = [
+            {
+                id: 101,
+                set: 'set1',
+                numAr: '١',
+                question: 'هي الوسيلة في حصول الأفراد على حاجاتهم المتعددة والمتنوعة:',
+                choices: [
+                    { letter: 'أ', text: 'النقود', isCorrect: true },
+                    { letter: 'ب', text: 'النقود الورقية', isCorrect: false },
+                    { letter: 'ج', text: 'النقود المعدنية', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) النقود'
+            },
+            {
+                id: 102,
+                set: 'set1',
+                numAr: '٢',
+                question: 'يسمى بالكتلة النقدية ويتمثل بمجموعة وسائل الدفع المتداولة في بلد ما خلال فترة زمنية معينة:',
+                choices: [
+                    { letter: 'أ', text: 'عرض النقد', isCorrect: true },
+                    { letter: 'ب', text: 'طلب النقد', isCorrect: false },
+                    { letter: 'ج', text: 'عرض النقود', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) عرض النقد'
+            },
+            {
+                id: 103,
+                set: 'set1',
+                numAr: '٣',
+                question: 'هي النقود المتمثلة بالعملة الورقية والمعدنية والتي تستخدم في المعاملات المختلفة:',
+                choices: [
+                    { letter: 'أ', text: 'النقود المتداولة', isCorrect: true },
+                    { letter: 'ب', text: 'تعريف النقود', isCorrect: false },
+                    { letter: 'ج', text: 'الطلب على النقود', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) النقود المتداولة'
+            },
+            {
+                id: 104,
+                set: 'set1',
+                numAr: '٤',
+                question: 'تعرف بأنها متوسط عدد المرات التي تنفق فيها الوحدة النقدية الواحدة خلال فترة زمنية معينة في مجتمع ما:',
+                choices: [
+                    { letter: 'أ', text: 'سرعة تداول النقود', isCorrect: true },
+                    { letter: 'ب', text: 'معدل دوران النقد', isCorrect: false },
+                    { letter: 'ج', text: 'معدل دوران رأس المال', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) سرعة تداول النقود'
+            },
+            {
+                id: 105,
+                set: 'set1',
+                numAr: '٥',
+                question: 'تطلق على نقود الودائع أو النقود الكتابية وتمثل وسيلة مهمة للدفع وتستخدم في الدول المتقدمة ذات الأنظمة المصرفية الحديثة:',
+                choices: [
+                    { letter: 'أ', text: 'النقود المصرفية', isCorrect: true },
+                    { letter: 'ب', text: 'نقود البنكنوت', isCorrect: false },
+                    { letter: 'ج', text: 'نقود الودائع', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) النقود المصرفية'
+            },
+            {
+                id: 106,
+                set: 'set1',
+                numAr: '٦',
+                question: 'هي قيمة نقدية تتخذ شكل وحدات ائتمانية مخزونة على شكل أداة إلكترونية يمتلكها المستخدم وتسمى بالبطاقة الإلكترونية:',
+                choices: [
+                    { letter: 'أ', text: 'النقود الإلكترونية', isCorrect: true },
+                    { letter: 'ب', text: 'النقود الحسابية', isCorrect: false },
+                    { letter: 'ج', text: 'النقود الحديثة', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) النقود الإلكترونية'
+            },
+            {
+                id: 107,
+                set: 'set1',
+                numAr: '٧',
+                question: 'هي النقود التي تصدرها السلطة التنفيذية في شكل قطع نقدية من معادن مختلفة مهمتها مساعدة النقود الورقية في تسهيل المبادلات صغيرة القيمة والتي يحتاجها الأفراد في حياتهم:',
+                choices: [
+                    { letter: 'أ', text: 'النقود المساعدة', isCorrect: true },
+                    { letter: 'ب', text: 'النقود الائتمانية', isCorrect: false },
+                    { letter: 'ج', text: 'النقود المتداولة', isCorrect: false },
+                    { letter: 'د', text: 'لا شيء مما سبق', isCorrect: false }
+                ],
+                examTableAnswer: '(أ) النقود المساعدة'
+            }
+        ];
+
+        // 4. DATA: MCQ Group 2 (Question 3 & General Review - 9 items)
+        const mcqSet2Data = [
+            {
+                id: 201,
+                set: 'set2',
+                numAr: '١',
+                question: 'في ظل قاعدة المعدنين يتم تحديد قيمة النقود بناءً على:',
+                choices: [
+                    { letter: 'أ', text: 'كمية الذهب فقط', isCorrect: false },
+                    { letter: 'ب', text: 'كمية الفضة فقط', isCorrect: false },
+                    { letter: 'ج', text: 'نسبة محددة بين الذهب والفضة', isCorrect: true },
+                    { letter: 'د', text: 'إصدار الحكومة للنقود الورقية', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) نسبة محددة بين الذهب والفضة'
+            },
+            {
+                id: 202,
+                set: 'set2',
+                numAr: '٢',
+                question: 'إذا ارتفع المستوى العام للأسعار بنسبة ١٠% فإن قيمة النقود الحقيقية:',
+                choices: [
+                    { letter: 'أ', text: 'ترتفع بنفس النسبة', isCorrect: false },
+                    { letter: 'ب', text: 'تبقى ثابتة', isCorrect: false },
+                    { letter: 'ج', text: 'تنخفض بنسبة ١٠%', isCorrect: true },
+                    { letter: 'د', text: 'تتضاعف', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) تنخفض بنسبة ١٠%'
+            },
+            {
+                id: 203,
+                set: 'set2',
+                numAr: '٣',
+                question: 'النقود تؤدي دور الوسيط في التبادل لأنها:',
+                choices: [
+                    { letter: 'أ', text: 'تحتفظ بالقيمة', isCorrect: false },
+                    { letter: 'ب', text: 'تقاس بها القيم', isCorrect: false },
+                    { letter: 'ج', text: 'تستخدم في سداد المعاملات', isCorrect: true },
+                    { letter: 'د', text: 'تخزن للادخار', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) تستخدم في سداد المعاملات'
+            },
+            {
+                id: 204,
+                set: 'set2',
+                numAr: '٤',
+                question: 'من خصائص النقود الجيدة:',
+                choices: [
+                    { letter: 'أ', text: 'القابلية للتلف', isCorrect: false },
+                    { letter: 'ب', text: 'الندرة النسبية والثبات النسبي في القيمة', isCorrect: true },
+                    { letter: 'ج', text: 'صعوبة النقل', isCorrect: false },
+                    { letter: 'د', text: 'عدم التجانس', isCorrect: false }
+                ],
+                examTableAnswer: '(ب) الندرة النسبية والثبات النسبي في القيمة'
+            },
+            {
+                id: 205,
+                set: 'set2',
+                numAr: '٥',
+                question: 'من أشكال قاعدة الذهب:',
+                choices: [
+                    { letter: 'أ', text: 'قاعدة الذهب السبائكي فقط', isCorrect: false },
+                    { letter: 'ب', text: 'قاعدة الذهب المسكوك فقط', isCorrect: false },
+                    { letter: 'ج', text: 'قاعدة الذهب الورقي فقط', isCorrect: false },
+                    { letter: 'د', text: 'كل ما سبق صحيح جزئياً', isCorrect: true }
+                ],
+                examTableAnswer: '(د) كل ما سبق صحيح جزئياً'
+            },
+            {
+                id: 206,
+                set: 'set2',
+                numAr: '٦',
+                question: 'وفقاً لنظرية كمية النقود إذا زادت كمية النقود المتداولة مع ثبات سرعة التداول والإنتاج فإن:',
+                choices: [
+                    { letter: 'أ', text: 'ينخفض المستوى العام للأسعار', isCorrect: false },
+                    { letter: 'ب', text: 'لا يتأثر المستوى العام للأسعار', isCorrect: false },
+                    { letter: 'ج', text: 'يرتفع المستوى العام للأسعار', isCorrect: true },
+                    { letter: 'د', text: 'تنخفض قيمة النقود الحقيقية', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) يرتفع المستوى العام للأسعار'
+            },
+            {
+                id: 207,
+                set: 'set2',
+                numAr: '٧',
+                question: 'في قاعدة النقود الورقية الإلزامية تكون النقود:',
+                choices: [
+                    { letter: 'أ', text: 'مغطاة بالكامل بالذهب', isCorrect: false },
+                    { letter: 'ب', text: 'ذات قيمة ذاتية', isCorrect: false },
+                    { letter: 'ج', text: 'تصدرها السلطة النقدية بقوة القانون دون غطاء', isCorrect: true },
+                    { letter: 'د', text: 'غير إلزامية في التعامل', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) تصدرها السلطة النقدية بقوة القانون دون غطاء'
+            },
+            {
+                id: 208,
+                set: 'set2',
+                numAr: '٨',
+                question: 'يقصد بمفهوم النقود أنها:',
+                choices: [
+                    { letter: 'أ', text: 'أداة لتخزين الثروة فقط', isCorrect: false },
+                    { letter: 'ب', text: 'كل ما يقبل قبولاً عاماً كوسيلة للتبادل ومقياس للقيم', isCorrect: true },
+                    { letter: 'ج', text: 'المعادن الثمينة فقط', isCorrect: false },
+                    { letter: 'د', text: 'أوراق مالية تصدرها البنوك التجارية', isCorrect: false }
+                ],
+                examTableAnswer: '(ب) كل ما يقبل قبولاً عاماً كوسيلة للتبادل ومقياس للقيم'
+            },
+            {
+                id: 209,
+                set: 'set2',
+                numAr: '٩',
+                question: 'من أهم خصائص النقود الجيدة:',
+                choices: [
+                    { letter: 'أ', text: 'الوفرة المفرطة', isCorrect: false },
+                    { letter: 'ب', text: 'صعوبة التجزئة', isCorrect: false },
+                    { letter: 'ج', text: 'الثبات النسبي في القيمة وسهولة الحمل', isCorrect: true },
+                    { letter: 'د', text: 'قابليتها للتلف بسهولة', isCorrect: false }
+                ],
+                examTableAnswer: '(ج) الثبات النسبي في القيمة وسهولة الحمل'
+            }
+        ];
+
+        // 5. DATA: Flashcards (18 comprehensive cards)
+        const flashcardsData = [
+            {
+                category: 'تعريفات العلماء',
+                q: 'ما هو تعريف العالم John Klein (جون كلاين) للنقود؟ وما الكلمة الخادعة في الامتحان؟',
+                a: 'عرفها بأنها: «أي شيء يلقى قبولاً عاماً كوسيلة لتسديد <span class="text-emerald-400">الديون</span>».<br><span class="text-rose-400 text-xs">خدعة الامتحان: يكتب لتسديد (النقود) والتصحيح (الديون).</span>'
+            },
+            {
+                category: 'تعريفات العلماء',
+                q: 'ما هو تعريف العالم Edward Shapiro (إدوارد شابيرو) للنقود؟',
+                a: 'عرفها بأنها: «أي شيء مقبول كوسيلة دفع للحصول على السلع والخدمات وتسديد <span class="text-emerald-400">الديون</span>».<br><span class="text-rose-400 text-xs">خدعة الامتحان: يكتب تسديد (المبالغ) والتصحيح (الديون).</span>'
+            },
+            {
+                category: 'تعريفات العلماء',
+                q: 'ما هو تعريف الاقتصادي الفرنسي Emile James (إميل جيمس) للنقود؟',
+                a: '«كل سلعة تسمح بحكم القانون أو العرف لكل مشتري أو مدين مقابل سلعة أو تسديد دين دون رفض أو مناقشة قيمتها من قبل البائع أو <span class="text-emerald-400">الدائن</span>».<br><span class="text-rose-400 text-xs">خدعة الامتحان: يكتب (أو المشتري) في آخر العبارة والتصحيح (أو الدائن).</span>'
+            },
+            {
+                category: 'الأسئلة المقالية',
+                q: 'اذكر في نقاط محددة: وظائف النقود؟',
+                a: '<strong>أولاً: الوظائف الأساسية:</strong><br>١- وحدة حساب ومقياس للقيمة.<br>٢- وسيلة للتبادل.<br><strong>ثانياً: الوظائف المشتقة (الثانوية):</strong><br>١- مخزن للقيمة.<br>٢- وسيلة للمدفوعات الآجلة.'
+            },
+            {
+                category: 'الأسئلة المقالية',
+                q: 'اذكر في نقاط محددة: الشروط التي يجب توافرها في النقود (٦ شروط)؟',
+                a: '١- التمتع بالقبول العام.<br>٢- أن تكون وحداتها متجانسة ومتماثلة.<br>٣- توفر كميات كافية لا تزيد أو تنقص للحفاظ على قيمتها التبادلية.<br>٤- قابلة للتقسيم.<br>٥- خفة وزنها وسهولة الحمل.<br>٦- غير قابلة للتلف أو الهلاك السريع.'
+            },
+            {
+                category: 'الأسئلة المقالية',
+                q: 'اذكر في نقاط محددة: أهمية النقود في الاقتصاد (٧ نقاط)؟',
+                a: '١- تسهيل عمليات التبادل.<br>٢- تحقيق الكفاءة الاقتصادية.<br>٣- مخزن للقيمة.<br>٤- أداة للسياسات الاقتصادية.<br>٥- مقياس للقيمة.<br>٦- تعزيز التجارة الداخلية والدولية.<br>٧- خلق الثقة في النظام الاقتصادي.'
+            },
+            {
+                category: 'قاعدة الذهب',
+                q: 'اذكر في نقاط محددة: شروط قاعدة الذهب (٤ شروط)؟',
+                a: '١- تحديد كل دولة قيمة عملتها بوزن معين من الذهب.<br>٢- تحديد كل أنواع النقود الأخرى بالنقود الأساسية في الدولة.<br>٣- حرية الأفراد في تحويل النقود إلى ذهب والذهب إلى نقود عبر السلطات النقدية.<br>٤- حرية تصدير واستيراد الذهب.'
+            },
+            {
+                category: 'قاعدة الذهب',
+                q: 'اذكر في نقاط محددة: مزايا قاعدة الذهب (٣ مزايا)؟',
+                a: '١- استقرار قيمة النقود.<br>٢- توفير وسيلة للمدفوعات الدولية.<br>٣- استقرار معدل التبادل الدولي أو سعر الصرف.'
+            },
+            {
+                category: 'مقارنة السبورة',
+                q: 'قارن بين قاعدة الذهب وقاعدة النقود الورقية الإلزامية من حيث (التعريف)؟',
+                a: '• <strong>قاعدة الذهب:</strong> نظام نقدي يرتبط فيه إصدار النقود بالذهب (غطاء ذهبي جزئي أو كامل).<br>• <strong>النقود الورقية الإلزامية:</strong> نظام تصدر فيه النقود بقوة القانون دون غطاء ذهبي.'
+            },
+            {
+                category: 'مقارنة السبورة',
+                q: 'قارن بين قاعدة الذهب وقاعدة النقود الورقية الإلزامية من حيث (المزايا والعيوب)؟',
+                a: '• <strong>مزايا الذهب:</strong> استقرار الأسعار، ثقة دولية، انضباط الإصدار | <strong>عيوبه:</strong> قيد على السياسة النقدية وعرضة للأزمات لندرة الذهب.<br>• <strong>مزايا الورقية الإلزامية:</strong> مرونة السياسة النقدية، انخفاض تكلفة الإصدار، تلبية النمو | <strong>عيوبها:</strong> احتمال التضخم وفقدان الثقة إذا أسيء استخدامها.'
+            },
+            {
+                category: 'نظرية كمية النقود',
+                q: 'ما هي معادلة المبادلات في نظرية كمية النقود؟ وما هي افتراضاتها؟',
+                a: 'المعادلة: <strong>ق × س = ك × ع</strong><br>(ق: كمية النقود، س: سرعة دوران النقود، ك: حجم الإنتاج، ع: المستوى العام للأسعار).<br><strong>افتراضاتها:</strong> (١) ثبات حجم الإنتاج ك، (٢) ثبات سرعة دوران النقود س. وبالتالي العلاقة بين (ق) و(ع) علاقة <strong>طردية</strong>.'
+            },
+            {
+                category: 'تعريفات المحاضرة',
+                q: 'ما هو تعريف (سرعة دوران النقود)؟ وما هو تعريف (النظام النقدي)؟',
+                a: '• <strong>سرعة دوران النقود:</strong> متوسط عدد مرات انتقال وحدة النقود من يد إلى يد خلال فترة زمنية معينة عادة تكون سنة.<br>• <strong>النظام النقدي:</strong> مجموعة من القواعد والإجراءات التي تنظم إصدار النقود وزيادتها أو سحبها من التداول.'
+            },
+            {
+                category: 'أنواع النقود',
+                q: 'ما الفرق بين (النقود المصرفية) و(النقود المساعدة)؟',
+                a: '• <strong>النقود المصرفية (الائتمانية):</strong> تطلق على نقود الودائع أو النقود الكتابية وتستخدم في <strong>الدول المتقدمة</strong> ذات الأنظمة المصرفية الحديثة.<br>• <strong>النقود المساعدة:</strong> تصدرها <strong>السلطة التنفيذية</strong> في شكل قطع نقدية من معادن مختلفة لمساعدة النقود الورقية في المبادلات صغيرة القيمة.'
+            },
+            {
+                category: 'أنواع النقود',
+                q: 'ما هو تعريف (النقود الإلكترونية)؟ وما أهم أنواعها؟',
+                a: '• <strong>التعريف:</strong> قيمة نقدية تتخذ شكل وحدات ائتمانية مخزونة على شكل أداة إلكترونية يمتلكها <strong>المستخدم</strong> وتسمى بالبطاقة الإلكترونية.<br>• <strong>أنواعها:</strong> البطاقة الإلكترونية، و<strong>بطاقات الخصم</strong> (وليس سعر الخصم!)، والشيكات الإلكترونية.'
+            },
+            {
+                category: 'الائتمان والبنوك',
+                q: 'ما هي خصائص القروض في البنك من حيث الربحية والسيولة؟ وما أنواع الضمانات؟',
+                a: '• القروض هي <strong>أعلى الأصول ربحية</strong> للبنك (بسبب الفائدة)، ولكن <strong>السيولة في مدة القرض = صفر</strong>.<br>• <strong>الضمانات:</strong> ١- ضمان شخصي (انتهى)، ٢- ضمان عيني (رهن شقة/أرض/مجوهرات/محصول)، ٣- <strong>ضمان مالي (الأفضل)</strong> مثل الودائع أو تحويل مرتب الموظف.'
+            }
+        ];
+
+        // ==========================================
+        // RENDER FUNCTIONS
+        // ==========================================
+        let isStudyBlurActive = false;
+        let tfUserAnswers = {};
+        let mcqUserAnswers = {};
+        let isMCQShuffled = false;
+        let currentTFQuizFilter = 'all';
+        let currentMCQQuizFilter = 'all';
+        let currentFlashcardIndex = 0;
+
+        function initApp() {
+            renderExamTables();
+            renderTFQuiz();
+            renderMCQQuiz();
+            renderFlashcard();
+            updateEqCalc();
+        }
+
+        // Render Tab 1 Tables
+        function renderExamTables() {
+            const blurClass = isStudyBlurActive ? 'study-blur' : '';
+
+            // 1. Table Q1 TF
+            const tbodyQ1 = document.getElementById('table-q1-tf');
+            tbodyQ1.innerHTML = tfSet1Data.map(item => `
+                <tr class="hover:bg-slate-800/40 transition searchable-row">
+                    <td class="py-3.5 px-4 font-extrabold text-center text-slate-300 bg-slate-950/40 border-l border-slate-800">${item.numAr}</td>
+                    <td class="py-3.5 px-4 text-slate-200 border-l border-slate-800 leading-relaxed">${item.statement}</td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3.5 px-4 text-center border-l border-slate-800 study-cell ${blurClass}">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30 font-black text-base">×</span>
+                    </td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3.5 px-4 font-extrabold text-emerald-400 study-cell ${blurClass}">
+                        ${item.correction}
+                        <span class="block text-[11px] text-slate-400 font-normal mt-0.5">بدلاً من: (${item.wrongWord})</span>
+                    </td>
+                </tr>
+            `).join('');
+
+            // 2. Table Q2 TF (Whiteboard)
+            const tbodyQ2 = document.getElementById('table-q2-tf');
+            tbodyQ2.innerHTML = tfSet2Data.map(item => `
+                <tr class="hover:bg-slate-800/40 transition searchable-row">
+                    <td class="py-3.5 px-4 font-extrabold text-center text-slate-300 bg-slate-950/40 border-l border-slate-800">${item.numAr}</td>
+                    <td class="py-3.5 px-4 text-slate-200 border-l border-slate-800 leading-relaxed">${item.statement}</td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3.5 px-4 text-center border-l border-slate-800 study-cell ${blurClass}">
+                        ${item.isTrue 
+                            ? '<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-black text-base">✓</span>'
+                            : '<span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-rose-500/20 text-rose-400 border border-rose-500/30 font-black text-base">×</span>'
+                        }
+                    </td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3.5 px-4 font-bold ${item.isTrue ? 'text-emerald-300' : 'text-amber-300'} study-cell ${blurClass}">
+                        ${item.correction}
+                    </td>
+                </tr>
+            `).join('');
+
+            // 3. Table MCQ 1
+            const tbodyMCQ1 = document.getElementById('table-mcq-1');
+            tbodyMCQ1.innerHTML = mcqSet1Data.map(item => `
+                <tr class="hover:bg-slate-800/40 transition searchable-row">
+                    <td class="py-3 px-3 font-extrabold text-center text-slate-300 bg-slate-950/40 border-l border-slate-800">${item.numAr}</td>
+                    <td class="py-3 px-3 text-slate-300 border-l border-slate-800 leading-relaxed">${item.question}</td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3 px-3 font-extrabold text-emerald-400 study-cell ${blurClass}">
+                        ${item.examTableAnswer}
+                    </td>
+                </tr>
+            `).join('');
+
+            // 4. Table MCQ 2
+            const tbodyMCQ2 = document.getElementById('table-mcq-2');
+            tbodyMCQ2.innerHTML = mcqSet2Data.map(item => `
+                <tr class="hover:bg-slate-800/40 transition searchable-row">
+                    <td class="py-3 px-3 font-extrabold text-center text-slate-300 bg-slate-950/40 border-l border-slate-800">${item.numAr}</td>
+                    <td class="py-3 px-3 text-slate-300 border-l border-slate-800 leading-relaxed">${item.question}</td>
+                    <td onclick="this.classList.toggle('revealed')" class="py-3 px-3 font-extrabold text-emerald-400 study-cell ${blurClass}">
+                        ${item.examTableAnswer}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Toggle Study Blur Mode
+        function toggleStudyHideMode() {
+            isStudyBlurActive = !isStudyBlurActive;
+            const allStudyCells = document.querySelectorAll('.study-cell');
+            allStudyCells.forEach(cell => {
+                cell.classList.remove('revealed');
+                if (isStudyBlurActive) {
+                    cell.classList.add('study-blur');
+                    cell.setAttribute('onclick', "this.classList.toggle('revealed')");
+                } else {
+                    cell.classList.remove('study-blur');
+                }
+            });
+
+            const btnText = document.getElementById('blurBtnText');
+            const blurIcon = document.getElementById('blurIcon');
+            if (isStudyBlurActive) {
+                btnText.textContent = 'وضع التسميع: مفعّل (اضغط على الخانة لإظهارها)';
+                blurIcon.className = 'fa-solid fa-eye text-emerald-400';
+            } else {
+                btnText.textContent = 'وضع التسميع: إيقاف';
+                blurIcon.className = 'fa-solid fa-eye-slash';
+            }
+        }
+
+        // Switch Navigation Tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.className = 'tab-btn flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-slate-800/80 text-slate-300 hover:bg-slate-800 hover:text-white';
+            });
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.className = 'tab-btn active-tab flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all bg-indigo-600 text-white shadow-md shadow-indigo-600/30';
+        }
+
+        // Equation of Exchange Calculator
+        function updateEqCalc() {
+            const total = parseFloat(document.getElementById('calcTotal').value) || 0;
+            const velocity = parseFloat(document.getElementById('calcVelocity').value) || 1;
+            const moneyNeeded = total / velocity;
+            const formatted = Number.isInteger(moneyNeeded) ? moneyNeeded : moneyNeeded.toFixed(2);
+            document.getElementById('calcResult').textContent = `${formatted} مليون جنيه`;
+        }
+
+        function resetEqCalc() {
+            document.getElementById('calcTotal').value = 1000;
+            document.getElementById('calcVelocity').value = 100;
+            updateEqCalc();
+        }
+
+        // ==========================================
+        // TAB 3: INTERACTIVE TRUE/FALSE QUIZ LOGIC
+        // ==========================================
+        function renderTFQuiz() {
+            const allQuestions = [
+                ...tfSet1Data.map(q => ({ ...q, group: 'q1', badge: 'السؤال الأول' })),
+                ...tfSet2Data.map(q => ({ ...q, group: 'board', badge: 'أسئلة السبورة والمراجعة' }))
+            ];
+
+            const filtered = allQuestions.filter(q => {
+                if (currentTFQuizFilter === 'all') return true;
+                return q.group === currentTFQuizFilter;
+            });
+
+            const container = document.getElementById('tf-quiz-container');
+            container.innerHTML = filtered.map((q, idx) => {
+                const userAns = tfUserAnswers[q.id];
+                const isAnswered = userAns !== undefined;
+                const isCorrect = isAnswered && userAns === q.isTrue;
+
+                let cardBorder = 'border-slate-800';
+                if (isAnswered) {
+                    cardBorder = isCorrect ? 'border-emerald-500/60 bg-emerald-950/10' : 'border-rose-500/60 bg-rose-950/10';
+                }
+
+                return `
+                    <div class="bg-slate-900 border ${cardBorder} rounded-2xl p-4 sm:p-5 transition shadow-lg">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <div class="space-y-1.5 flex-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-extrabold px-2.5 py-0.5 rounded-lg bg-slate-800 text-indigo-300 border border-slate-700">عبارة ${q.numAr}</span>
+                                    <span class="text-xs text-slate-400">${q.badge}</span>
+                                </div>
+                                <p class="text-sm sm:text-base font-bold text-slate-100 leading-relaxed">${q.rawStatement}</p>
+                            </div>
+
+                            <!-- True / False Buttons -->
+                            <div class="flex items-center gap-2.5 shrink-0">
+                                <button 
+                                    onclick="answerTF(${q.id}, true)"
+                                    class="px-5 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-1.5 border transition ${
+                                        isAnswered && userAns === true
+                                            ? (q.isTrue ? 'bg-emerald-600 text-white border-emerald-400' : 'bg-rose-600 text-white border-rose-400')
+                                            : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
+                                    }"
+                                >
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>صح (✓)</span>
+                                </button>
+                                <button 
+                                    onclick="answerTF(${q.id}, false)"
+                                    class="px-5 py-2.5 rounded-xl font-extrabold text-sm flex items-center gap-1.5 border transition ${
+                                        isAnswered && userAns === false
+                                            ? (!q.isTrue ? 'bg-emerald-600 text-white border-emerald-400' : 'bg-rose-600 text-white border-rose-400')
+                                            : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700'
+                                    }"
+                                >
+                                    <i class="fa-solid fa-xmark"></i>
+                                    <span>خطأ (×)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Feedback & Correction Box -->
+                        ${isAnswered ? `
+                            <div class="mt-4 pt-3.5 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs sm:text-sm">
+                                <div class="font-bold ${isCorrect ? 'text-emerald-400' : 'text-rose-400'}">
+                                    ${isCorrect 
+                                        ? '<i class="fa-solid fa-circle-check ml-1"></i> إجابة صحيحة!' 
+                                        : '<i class="fa-solid fa-circle-xmark ml-1"></i> انتبه! إجابتك غير مطابقة لنموذج الامتحان.'}
+                                </div>
+                                <div class="bg-slate-950 px-3.5 py-2 rounded-xl border border-slate-800 text-slate-200">
+                                    <span class="text-slate-400">الجدول النموذجي:</span>
+                                    <strong class="mx-1 ${q.isTrue ? 'text-emerald-400' : 'text-rose-400'}">${q.isTrue ? '(✓)' : '(×)'}</strong>
+                                    | التصحيح: <strong class="text-amber-300">${q.fullCorrection}</strong>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            updateTFScore();
+        }
+
+        function answerTF(id, choice) {
+            tfUserAnswers[id] = choice;
+            renderTFQuiz();
+        }
+
+        function updateTFScore() {
+            const allQuestions = [...tfSet1Data, ...tfSet2Data];
+            let correct = 0;
+            allQuestions.forEach(q => {
+                if (tfUserAnswers[q.id] === q.isTrue) correct++;
+            });
+            document.getElementById('tf-score-display').textContent = `${correct} / ${allQuestions.length}`;
+        }
+
+        function resetTFQuiz() {
+            tfUserAnswers = {};
+            renderTFQuiz();
+        }
+
+        function filterTFQuiz(filter) {
+            currentTFQuizFilter = filter;
+            ['all', 'q1', 'board'].forEach(f => {
+                const btn = document.getElementById(`tf-filter-${f}`);
+                btn.className = f === filter
+                    ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white'
+                    : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white';
+            });
+            renderTFQuiz();
+        }
+
+        // ==========================================
+        // TAB 4: INTERACTIVE MCQ QUIZ LOGIC
+        // ==========================================
+        function renderMCQQuiz() {
+            const allMCQ = [...mcqSet1Data, ...mcqSet2Data];
+            const filtered = allMCQ.filter(q => {
+                if (currentMCQQuizFilter === 'all') return true;
+                return q.set === currentMCQQuizFilter;
+            });
+
+            const container = document.getElementById('mcq-quiz-container');
+            container.innerHTML = filtered.map(q => {
+                const selectedIdx = mcqUserAnswers[q.id];
+                const isAnswered = selectedIdx !== undefined;
+
+                // Prepare choices (either original order or deterministic shuffle when shuffle mode is active)
+                let displayChoices = q.choices.map((c, idx) => ({ ...c, origIdx: idx }));
+                if (isMCQShuffled) {
+                    displayChoices = [...displayChoices].sort((a, b) => (a.text.length * 7 + q.id) % 5 - (b.text.length * 3 + q.id) % 5);
+                }
+
+                const arabicLetters = ['أ', 'ب', 'ج', 'د'];
+
+                return `
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 flex flex-col justify-between shadow-lg">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2.5">
+                                <span class="text-xs font-extrabold px-2.5 py-0.5 rounded-lg bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                                    ${q.set === 'set1' ? `المجموعة الأولى - رقم ${q.numAr}` : `المجموعة الثانية - رقم ${q.numAr}`}
+                                </span>
+                                ${isAnswered ? `
+                                    <span class="text-xs font-bold ${q.choices[selectedIdx].isCorrect ? 'text-emerald-400' : 'text-rose-400'}">
+                                        ${q.choices[selectedIdx].isCorrect ? '✓ إجابة صحيحة' : '✗ إجابة خاطئة'}
+                                    </span>
+                                ` : ''}
+                            </div>
+                            <h3 class="text-sm sm:text-base font-extrabold text-white mb-4 leading-relaxed">${q.question}</h3>
+
+                            <div class="space-y-2">
+                                ${displayChoices.map((choice, cIdx) => {
+                                    const isThisSelected = selectedIdx === choice.origIdx;
+                                    let btnStyle = 'bg-slate-950/70 hover:bg-slate-800 border-slate-800 text-slate-200';
+                                    if (isAnswered) {
+                                        if (choice.isCorrect) {
+                                            btnStyle = 'bg-emerald-600/25 border-emerald-500 text-emerald-200 font-bold';
+                                        } else if (isThisSelected && !choice.isCorrect) {
+                                            btnStyle = 'bg-rose-600/25 border-rose-500 text-rose-200';
+                                        }
+                                    }
+
+                                    return `
+                                        <button 
+                                            onclick="answerMCQ(${q.id}, ${choice.origIdx})"
+                                            class="w-full text-right p-3 rounded-xl border text-xs sm:text-sm flex items-center justify-between transition ${btnStyle}"
+                                        >
+                                            <div class="flex items-center gap-2.5">
+                                                <span class="w-6 h-6 rounded-lg bg-slate-800 text-slate-300 font-bold flex items-center justify-center text-xs shrink-0">
+                                                    ${arabicLetters[cIdx]}
+                                                </span>
+                                                <span>${choice.text}</span>
+                                            </div>
+                                            ${isAnswered && choice.isCorrect ? '<i class="fa-solid fa-circle-check text-emerald-400"></i>' : ''}
+                                        </button>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        ${isAnswered ? `
+                            <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+                                <span>ما يُكتب في جدول الامتحان:</span>
+                                <span class="text-emerald-300 font-extrabold">${q.examTableAnswer}</span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            updateMCQScore();
+        }
+
+        function answerMCQ(qId, origIdx) {
+            mcqUserAnswers[qId] = origIdx;
+            renderMCQQuiz();
+        }
+
+        function updateMCQScore() {
+            const allMCQ = [...mcqSet1Data, ...mcqSet2Data];
+            let correct = 0;
+            allMCQ.forEach(q => {
+                const ansIdx = mcqUserAnswers[q.id];
+                if (ansIdx !== undefined && q.choices[ansIdx].isCorrect) {
+                    correct++;
+                }
+            });
+            document.getElementById('mcq-score-display').textContent = `${correct} / ${allMCQ.length}`;
+        }
+
+        function toggleMCQShuffle() {
+            isMCQShuffled = !isMCQShuffled;
+            document.getElementById('mcq-shuffle-text').textContent = isMCQShuffled
+                ? 'ترتيب الخيارات: عشوائي (للفهم)'
+                : 'ترتيب الخيارات: الملزمة الأصلي';
+            renderMCQQuiz();
+        }
+
+        function resetMCQQuiz() {
+            mcqUserAnswers = {};
+            renderMCQQuiz();
+        }
+
+        function filterMCQQuiz(filter) {
+            currentMCQQuizFilter = filter;
+            ['all', 'set1', 'set2'].forEach(f => {
+                const btn = document.getElementById(`mcq-filter-${f}`);
+                btn.className = f === filter
+                    ? 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white'
+                    : 'px-3.5 py-1.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white';
+            });
+            renderMCQQuiz();
+        }
+
+        // ==========================================
+        // TAB 5: FLASHCARDS LOGIC
+        // ==========================================
+        function renderFlashcard() {
+            const card = flashcardsData[currentFlashcardIndex];
+            const inner = document.getElementById('flashcard-inner');
+            inner.classList.remove('rotate-y-180');
+
+            document.getElementById('fc-category').textContent = card.category;
+            document.getElementById('fc-question').innerHTML = card.q;
+            document.getElementById('fc-answer').innerHTML = card.a;
+            document.getElementById('flashcard-counter').textContent = `${currentFlashcardIndex + 1} / ${flashcardsData.length}`;
+        }
+
+        function flipCurrentCard() {
+            document.getElementById('flashcard-inner').classList.toggle('rotate-y-180');
+        }
+
+        function nextFlashcard() {
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % flashcardsData.length;
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            currentFlashcardIndex = (currentFlashcardIndex - 1 + flashcardsData.length) % flashcardsData.length;
+            renderFlashcard();
+        }
+
+        // ==========================================
+        // GLOBAL SEARCH FILTER
+        // ==========================================
+        function handleGlobalSearch(query) {
+            const cleanQuery = query.trim().toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            if (cleanQuery.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            // Filter rows in tables
+            document.querySelectorAll('.searchable-row').forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(cleanQuery) ? '' : 'none';
+            });
+        }
+
+        function clearGlobalSearch() {
+            const input = document.getElementById('globalSearch');
+            input.value = '';
+            handleGlobalSearch('');
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
